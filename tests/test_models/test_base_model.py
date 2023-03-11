@@ -41,7 +41,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(str(uuid.UUID(self.b1.id)) == self.b1.id)
         self.assertTrue(str(uuid.UUID(self.b2.id)) == self.b2.id)
         self.b1.id = 'this is a bad UUID format'
-        with self.assertRaises(ValueError,
+        with self.assertRaises(
+                ValueError,
                 msg='badly formed hexadecimal UUID string') as e:
             uuid.UUID(self.b1.id)
 
