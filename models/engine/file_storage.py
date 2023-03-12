@@ -55,5 +55,5 @@ class FileStorage:
                 objs = load(f)
                 for k, v in objs.items():
                     self.__objects[k] = eval(v['__class__'])(**v)
-        except:
+        except Exception:
             pass
