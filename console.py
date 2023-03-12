@@ -185,12 +185,33 @@ class HBNBCommand(cmd.Cmd):
         setattr(obj, att, val)
         obj.save()
 
+    def do_count(self, line):
+        '''
+        count commands to count the number of instances of a class
+        '''
+        args = line.split()
+        cls_name = None if len(args) == 0 else args[0]
+        count = 0
+        if cls_name is None:
+            for v in models.storage.all().values():
+                count += 1
+        else:
+            if cls_name not in HBNBCommand.__classes:
+                print("** class doesn't exist **")
+                return
+            else:
+                for v in models.storage.all().values():
+                    if cls_name == v.__class__.__name__:
+                        count += 1
+        print(count)
+
     def default(self, line):
         '''
         Handles unrecognized commands syntax
         '''
         cmd_funcs = {
-                'all': self.do_all
+                'all': self.do_all,
+                'count': self.do_count
                 }
 
         cleaned_line = rmtrchr(line)
@@ -228,7 +249,7 @@ class HBNBCommand(cmd.Cmd):
             print("*** Unknown syntax:", line)
             return
 
-        if cmd_func in ['all']:
+        if cmd_func in ['all', 'count']:
             cp_idx = remain.find(')', op_idx + 1)
             if cp_idx != - 1 and remain.find(')', cp_idx + 1) != -1:
                 print("*** Unknown syntax:", line)
