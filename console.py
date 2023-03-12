@@ -185,12 +185,75 @@ class HBNBCommand(cmd.Cmd):
         setattr(obj, att, val)
         obj.save()
 
+    def default(self, line):
+        '''
+        Handles unrecognized commands syntax
+        '''
+        cmd_funcs = {
+                'all': self.do_all
+                }
+
+        cleaned_line = rmtrchr(line)
+        if '.' not in line:
+            print("*** Unknown syntax:", line)
+            return
+
+        dot_idx = cleaned_line.find('.')  # Finding the first dot
+        if dot_idx == - 1:
+            print("*** Unknown syntax:", line)
+            return
+        if dot_idx + 1 >= len(line):
+            print("*** Unknown syntax:", line)
+            return
+
+        cmd_cls = cleaned_line[:dot_idx]
+        if cmd_cls not in HBNBCommand.__classes:
+            print("*** Unknown syntax:", line)
+            return
+
+        remain = cleaned_line[dot_idx + 1:]
+
+        if '(' not in remain or ')' not in remain\
+                or ('(' in remain and remain[len(remain) - 1] != ')'):
+            print("*** Unknown syntax:", line)
+            return
+
+        op_idx = remain.find('(')  # Finding the opening parenthesis
+        cmd_func = remain[:op_idx]
+        if cmd_func not in cmd_funcs:
+            print("*** Unknown syntax:", line)
+            return
+
+        if remain.find('(', op_idx + 1) != -1:
+            print("*** Unknown syntax:", line)
+            return
+
+        if cmd_func in ['all']:
+            cp_idx = remain.find(')', op_idx + 1)
+            if cp_idx != - 1 and remain.find(')', cp_idx + 1) != -1:
+                print("*** Unknown syntax:", line)
+                return
+            # At this stage, the line is perfected
+            cmd_funcs[cmd_func](cmd_cls)
+            return
+
     def do_clear(self, line):
         '''
         clear command to clear the interpreter interface
         '''
         from os import system
         system('clear')
+
+
+def rmtrchr(line):
+    '''
+    Removes Trailing characters of a line
+    '''
+    chars = [chr(32), chr(8), chr(9), chr(10), chr(11), chr(12), chr(13)]
+    clean_line = ''
+    for char in chars:
+        clean_line = line.replace(char, '')
+    return clean_line
 
 
 if __name__ == '__main__':
