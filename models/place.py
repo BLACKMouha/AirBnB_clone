@@ -3,7 +3,7 @@
 Holds Place class
 '''
 import models
-from models.base_model impor BaseModel
+from models.base_model import BaseModel
 
 
 class Place(BaseModel):

@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
     '''
     HBNB Command Interpreter definition
     '''
-    prompt = '(hbnb)' if sys.__stdin__.isatty() else ''
+    prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
     __classes = {'Amenity': Amenity,
                  'BaseModel': BaseModel,
                  'City': City,
@@ -29,31 +29,32 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         '''
-        Leaves the command interpreter
+        Quit command to exit the program
         '''
         return True
 
     def do_EOF(self, arg):
         '''
-        Leaves the command interpreter
+        EOF command to exit the program when EOF is triggered
         '''
         return True
 
     def do_help(self, arg):
         '''
-        Displays docstring of a command passed to `arg`
+        help command to display docstring of a command passed to `arg`
         '''
         return super().do_help(arg)
 
     def emptyline(self):
         '''
-        Prints prompts if the line is empty when pressing Enter for example
+        emptyline command is triggered when the line is empty when pressing
+        Enter for example
         '''
         pass
 
     def do_create(self, line):
         '''
-        Create an instance
+        create command to initializes an instance
         '''
         cls_name = line
         if not cls_name:
@@ -69,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         '''
-        Prints an instance based on its class and id
+        show command to print an instance based on its class and id
         '''
         args = line.split()
         if len(args) == 0:
@@ -92,7 +93,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         '''
-        Deletes an instance based on the class name and id.
+        destroy command to delete an instance based on the class name and id.
         Changes are saved in the JSON file too.
         '''
         args = line.split()
@@ -116,8 +117,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         '''
-        Prints all string representation of all instances based or not on the
-        class name
+        all command to prints all string representation of instances based
+        or not on the class name
         '''
         args = line.split()
         cls_name = args[0] if len(args) != 0 else None
@@ -137,8 +138,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         '''
-        Updates an instance based on the class name and id by adding or
-        updating attributes.
+        update command to update an instance based on the class name and id by
+        adding or updating attributes.
         All changes are automatically save in the JSON file
         '''
         args = line.split()
@@ -186,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_clear(self, line):
         '''
-        Clear command interpreter
+        clear command to clear the interpreter interface
         '''
         from os import system
         system('clear')

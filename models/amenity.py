@@ -6,7 +6,7 @@ import models
 from models.base_model import BaseModel
 
 
-class amenity(BaseModel):
+class Amenity(BaseModel):
     '''
     Representation of Amenity class
     '''
