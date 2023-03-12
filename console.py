@@ -20,7 +20,16 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, arg):
+        '''
+        Leaves the command interpreter
+        '''
         return True
+
+    def emptyline(self):
+        '''
+        Prints prompts if the line is empty when pressing Enter for example
+        '''
+        pass
 
 
 if __name__ == '__main__':
