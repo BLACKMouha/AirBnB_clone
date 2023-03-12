@@ -13,7 +13,6 @@ class HBNBCommand(cmd.Cmd):
     HBNB Command Interpreter definition
     '''
     prompt = '(hbnb) '
-
     __classes = {'BaseModel': BaseModel,
                  'User': User}
 
@@ -47,10 +46,9 @@ class HBNBCommand(cmd.Cmd):
         if cls_name not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
-        obj = eval(cls_name)()
+        obj = HBNBCommand.__classes[cls_name]()
         obj.save()
         print(obj.id)
-        return
 
     def do_show(self, line):
         '''
@@ -74,7 +72,6 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
         else:
             print(all_objs[key])
-        return
 
     def do_destroy(self, line):
         '''
@@ -99,7 +96,6 @@ class HBNBCommand(cmd.Cmd):
             return
         del models.storage.all()[key]
         models.storage.save()
-        return
 
     def do_all(self, line):
         '''
@@ -121,7 +117,6 @@ class HBNBCommand(cmd.Cmd):
                     if cls_name == v.__class__.__name__:
                         list_objs.append(str(v))
         print(list_objs)
-        return
 
     def do_update(self, line):
         '''
@@ -171,7 +166,6 @@ class HBNBCommand(cmd.Cmd):
 
         setattr(obj, att, val)
         obj.save()
-        return
 
     def do_clear(self, line):
         '''
