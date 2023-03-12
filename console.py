@@ -4,6 +4,7 @@ HBNB Command Interpreter
 '''
 import models
 import cmd
+import sys
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
@@ -17,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
     '''
     HBNB Command Interpreter definition
     '''
-    prompt = '(hbnb) '
+    prompt = '(hbnb)' if sys.__stdin__.isatty() else ''
     __classes = {'Amenity': Amenity,
                  'BaseModel': BaseModel,
                  'City': City,
@@ -38,6 +39,12 @@ class HBNBCommand(cmd.Cmd):
         '''
         return True
 
+    def do_help(self, arg):
+        '''
+        Displays docstring of a command passed to `arg`
+        '''
+        return super().do_help(arg)
+
     def emptyline(self):
         '''
         Prints prompts if the line is empty when pressing Enter for example
@@ -48,11 +55,11 @@ class HBNBCommand(cmd.Cmd):
         '''
         Create an instance
         '''
-        args = line.split()
-        if len(args) == 0:
+        cls_name = line
+        if not cls_name:
             print('** class name missing **')
             return
-        cls_name = args[0]
+
         if cls_name not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
