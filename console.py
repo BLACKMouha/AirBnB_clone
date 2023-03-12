@@ -6,7 +6,6 @@ import cmd
 from models.base_model import BaseModel
 import models
 
-
 class HBNBCommand(cmd.Cmd):
     '''
     HBNB Command Interpreter definition
@@ -43,7 +42,10 @@ class HBNBCommand(cmd.Cmd):
         if cls_name != 'BaseModel':
             print("** class doesn't exist **")
             return
-        eval(cls_name)().save()
+        obj = eval(cls_name)()
+        obj.save()
+        print(obj.id)
+        return
 
     def do_show(self, line):
         '''
@@ -164,6 +166,7 @@ class HBNBCommand(cmd.Cmd):
 
         setattr(obj, att, val)
         obj.save()
+        return
 
     def do_clear(self, line):
         '''
