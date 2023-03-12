@@ -2,9 +2,10 @@
 '''
 HBNB Command Interpreter
 '''
+import models
 import cmd
 from models.base_model import BaseModel
-import models
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -12,6 +13,10 @@ class HBNBCommand(cmd.Cmd):
     HBNB Command Interpreter definition
     '''
     prompt = '(hbnb) '
+
+    __classes = {'BaseModel': BaseModel,
+               'User': User}
+
 
     def do_quit(self, arg):
         '''
@@ -40,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         cls_name = args[0]
-        if cls_name != 'BaseModel':
+        if cls_name not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
         obj = eval(cls_name)()
@@ -57,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         cls_name = args[0]
-        if cls_name != 'BaseModel':
+        if cls_name not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
@@ -82,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         cls_name = args[0]
-        if cls_name != 'BaseModel':
+        if cls_name not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
@@ -109,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
             for v in models.storage.all().values():
                 list_objs.append(str(v))
         else:
-            if cls_name != 'BaseModel':
+            if cls_name not in HBNBCommand.__classes:
                 print("** class doesn't exist **")
                 return
             else:
@@ -130,7 +135,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         cls_name = args[0]
-        if cls_name != 'BaseModel':
+        if cls_name not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
