@@ -7,6 +7,7 @@ from models.base_model import BaseModel
 from models.state import State
 import uuid
 from datetime import datetime
+import os
 
 
 class TestState(unittest.TestCase):
@@ -21,6 +22,13 @@ class TestState(unittest.TestCase):
         self.s1 = State()
         self.s2 = State(name="Holberton")
 
+    def tearDown(self):
+        '''
+        Clean up
+        '''
+        if os.path.exists('file.json'):
+            os.remove('file.json')
+
     def test_init(self):
         '''
         Testing initialization of a BaseModel instance
@@ -28,7 +36,7 @@ class TestState(unittest.TestCase):
         self.assertEqual('State', self.s1.__class__.__name__)
         native_instance_attributes = ['id', 'created_at', 'updated_at', 'name']
         for att in native_instance_attributes:
-            self.assertIn(att, self.u1.__dir__())
+            self.assertIn(att, self.s1.__dir__())
 
         state_attributes = ['name']
         for att in state_attributes:
@@ -45,7 +53,7 @@ class TestState(unittest.TestCase):
         '''
         All tests of id instance attribute
         '''
-        self.assertTrue(type(self.u1.id) == str)
+        self.assertTrue(type(self.s1.id) == str)
         self.assertTrue(str(uuid.UUID(self.s1.id)) == self.s1.id)
         self.assertTrue(str(uuid.UUID(self.s2.id)) == self.s2.id)
 

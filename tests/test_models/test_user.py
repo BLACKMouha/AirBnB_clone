@@ -13,6 +13,7 @@ class TestUser(unittest.TestCase):
     '''
     Define test cases for User class
     '''
+    @staticmethod
     def setUp(self):
         '''
         Prepare all tests
@@ -21,6 +22,14 @@ class TestUser(unittest.TestCase):
         self.u1 = User()
         self.u2 = User(first_name="Betty", last_name='Holberton',
                        email='airbnb@mail.com', password="root")
+
+    @staticmethod
+    def tearDown(self):
+        '''
+        Clean up
+        '''
+        if os.path.exists('file.json'):
+            os.remove('file.json')
 
     def test_init(self):
         '''

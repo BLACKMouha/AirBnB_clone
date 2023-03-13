@@ -2,10 +2,12 @@
 '''
 Unittest for BaseModel class
 '''
+import models
 import unittest
 from models.base_model import BaseModel
 import uuid
 from datetime import datetime
+import os
 
 
 class TestBaseModel(unittest.TestCase):
@@ -17,8 +19,13 @@ class TestBaseModel(unittest.TestCase):
         Prepare all tests
         '''
         self.time = "%Y-%m-%dT%H:%M:%S.%f"
+
         self.b1 = BaseModel()
         self.b2 = BaseModel(my_number=89, name='Holberton')
+
+    def tearDown(self):
+        if os.path.exists('file.json'):
+            os.remove('file.json')
 
     def test_init(self):
         '''
@@ -62,6 +69,11 @@ class TestBaseModel(unittest.TestCase):
         updated_at_before_save = self.b1.updated_at
         self.b1.save()
         self.assertLess(updated_at_before_save, self.b1.updated_at)
+        all_objs = models.storage.all()
+        key = self.b1.to_dict()['__class__'] + '.' + self.b1.id
+        self.assertIn(key, all_objs)
+        obj = all_objs[key]
+        self.assertEqual(self.b1.updated_at, obj.updated_at)
 
     def test_to_dict(self):
         d = self.b1.to_dict()

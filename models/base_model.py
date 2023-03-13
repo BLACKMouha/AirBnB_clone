@@ -29,6 +29,11 @@ class BaseModel:
                     if k in ['created_at', 'updated_at']:
                         v = datetime.strptime(v, fmt)
                     setattr(self, k, v)
+            if 'id' not in kwargs:
+                self.id = str(uuid.uuid4())
+            if 'created_at' not in kwargs:
+                self.created_at = datetime.utcnow()
+                self.updated_at = datetime.utcnow()
 
     def __str__(self):
         '''
