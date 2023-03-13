@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 '''
-Unittest for BaseModel class
+Unittest for User class
 '''
 import unittest
 from models.base_model import BaseModel
@@ -26,7 +26,7 @@ class TestUser(unittest.TestCase):
         '''
         Testing initialization of a BaseModel instance
         '''
-        self.assertEqual('BaseModel', self.b1.__class__.__name__)
+        self.assertEqual('User', self.b1.__class__.__name__)
         native_instance_attributes = ['id', 'created_at', 'updated_at',
                                       'email', 'password', 'last_name',
                                       'firt_name']
@@ -43,7 +43,7 @@ class TestUser(unittest.TestCase):
 
         native_public_instance_methods = ['save', 'to_dict']
         for meth in native_public_instance_methods:
-            self.assertIn(meth, self.b1.__dir__())
+            self.assertIn(meth, self.u1.__dir__())
 
     def test_id(self):
         '''
