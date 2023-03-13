@@ -6,6 +6,7 @@ import unittest
 from models.base_model import BaseModel
 from models.user import User
 import uuid
+import os
 from datetime import datetime
 
 
@@ -13,7 +14,6 @@ class TestUser(unittest.TestCase):
     '''
     Define test cases for User class
     '''
-    @staticmethod
     def setUp(self):
         '''
         Prepare all tests
@@ -23,7 +23,6 @@ class TestUser(unittest.TestCase):
         self.u2 = User(first_name="Betty", last_name='Holberton',
                        email='airbnb@mail.com', password="root")
 
-    @staticmethod
     def tearDown(self):
         '''
         Clean up
@@ -33,12 +32,12 @@ class TestUser(unittest.TestCase):
 
     def test_init(self):
         '''
-        Testing initialization of a BaseModel instance
+        Testing initialization of a User instance
         '''
-        self.assertEqual('User', self.b1.__class__.__name__)
+        self.assertEqual('User', self.u1.__class__.__name__)
         native_instance_attributes = ['id', 'created_at', 'updated_at',
                                       'email', 'password', 'last_name',
-                                      'firt_name']
+                                      'first_name']
         for att in native_instance_attributes:
             self.assertIn(att, self.u1.__dir__())
 
