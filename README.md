@@ -1,7 +1,7 @@
 # AirBnB clone project
 
 ## Description
-The goal of this project is to deploy a simple of the AirBnB website.
+The goal of this project is to deploy a simplified copy of the AirBnB website.
 The first step is to build a command intepreter to manipulate data without
 visual interface, like in a Shell (perfect for debugging and development).
 The interface is called The Console. For now, the console is able to
