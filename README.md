@@ -58,7 +58,18 @@ Classes defined
 
 ```bash
 $ create <class>
+$
 $ all [<class>]
+$ <class>.all()
+$
+$ count [<class>]
+$
 $ show <class> <id>
+$ <class>.show("<id>")
+$
 $ destroy <class> <id>
+$ <class>.destroy("<id>")
+$
+$ update <class> <id> <key> <value>
+$ <class>.update("<id>" {"<key1>"=<value1>, "<key2>"="<value2>", ..., "<keyn>"=<valuen>})
 ```
