@@ -27,23 +27,22 @@ $
 In non-interactive mode
 ```bash
 $ echo "help" | ./console.py
-(hbnb)
+$
 Documented commands (type help <command>):
 ========================================
 EOF   all   count   create   destroy   help   quit   show
 
-(hbnb)
 $
 $ cat test_help
 help
 $
 $ cat test_help | ./console.py
-(hbnb)
+$
 Documented commands (type help <command>):
 ========================================
 EOF   all   count   create   destroy   help   quit   show
 
-(hbnb)
+$
 $
 ```
 Classes defined
@@ -57,19 +56,19 @@ Classes defined
 - Review
 
 ```bash
-$ create <class>
-$
-$ all [<class>]
-$ <class>.all()
-$
-$ count [<class>]
-$
-$ show <class> <id>
-$ <class>.show("<id>")
-$
-$ destroy <class> <id>
-$ <class>.destroy("<id>")
-$
-$ update <class> <id> <key> <value>
-$ <class>.update("<id>", {"<key1>"=<value1>, "<key2>"="<value2>", ..., "<keyn>"=<valuen>})
+(hbnb) create <class>
+(hbnb)
+(hbnb) all [<class>]
+(hbnb) <class>.all()
+(hbnb)
+(hbnb) count [<class>]
+(hbnb)
+(hbnb) show <class> <id>
+(hbnb) <class>.show("<id>")
+(hbnb)
+(hbnb) destroy <class> <id>
+(hbnb) <class>.destroy("<id>")
+(hbnb)
+(hbnb) update <class> <id> <key> <value>
+(hbnb) <class>.update("<id>", {"<key1>"=<value1>, "<key2>"="<value2>", ..., "<keyn>"=<valuen>})
 ```
